@@ -1,0 +1,22 @@
+# RTL Simulation Variables
+sim.inputs:
+  input_files:
+  - "src/gcd_coprocessor.v"
+  - "src/gcd_arbiter.v"
+  - "src/gcd_unit.v"
+  - "src/gcd_datapath.v"
+  - "src/gcd_control.v"
+  - "src/fifo.v"
+  - "src/EECS151.v"
+  - "src/gcd_coprocessor_testbench.v"
+  timescale: "1ns/10ps"
+  options:
+    - "-notice"
+    - "-line"
+    - "+lint=all,noVCDE"
+    - "+v2k"
+    - "-debug"
+  top_module: "gcd_coprocessor"
+  tb_name: "gcd_coprocessor_testbench"
+  defines: 
+    - "CLOCK_PERIOD=1.00"

@@ -1,0 +1,84 @@
+# Technology Setup
+# Technology used is Sky130
+vlsi.core.technology: hammer.technology.sky130
+technology.sky130:
+  sky130A: "/home/ff/eecs151/fa23/pdk_mod/lab3/sky130A"
+  sram22_sky130_macros: "/home/ff/eecs151/fa23/sky130_srams/sram22_sky130_macros"  
+
+vlsi.core.max_threads: 4
+
+# General Hammer Inputs
+
+vlsi.inputs.supplies.VDD: "1.8 V"
+
+# Hammer will auto-generate a CPF for simple power designs; see hammer/src/hammer-vlsi/defaults.yml for more info
+vlsi.inputs.power_spec_mode: "auto"
+vlsi.inputs.power_spec_type: "cpf"
+
+# Specify the setup and hold corners for Sky130
+vlsi.inputs.mmmc_corners: [
+  {name: "ss_100C_1v60", type: "setup", voltage: "1.60 V", temp: "100 C"},
+  {name: "ff_n40C_1v95", type: "hold", voltage: "1.95 V", temp: "-40 C"}
+]
+
+# SRAM Compiler compiler options
+vlsi.core.sram_generator_tool: "hammer.technology.sky130.sram_compiler"
+# Specify this since we are not using macrocompiler
+vlsi.inputs.sram_parameters: "/home/ff/eecs151/fa23/hammer/hammer/technology/sky130/sram-cache.json"  
+vlsi.inputs.sram_parameters_meta: ["transclude", "json2list"]
+
+# Tool options. Replace with your tool plugin of choice.
+# Genus options
+vlsi.core.synthesis_tool: "hammer.synthesis.genus"
+synthesis.genus.version: "191"
+
+# Innovus options
+vlsi.core.par_tool: "hammer.par.innovus"
+par.innovus.version: "191" # TODO
+par.innovus.design_flow_effort: "standard"
+par.inputs.gds_merge: true
+
+# Calibre options
+vlsi.core.drc_tool: "hammer.drc.calibre"
+vlsi.core.lvs_tool: "hammer.lvs.calibre"
+drc.calibre.calibre_drc_bin: "/share/instsww/mgc/CALIBRE/bin/calibre"
+drc.calibre.calibredrv_bin: "/share/instsww/mgc/CALIBRE/bin/calibredrv"
+drc.calibre.MGC_HOME: "/shared/instsww/mgc"
+lvs.calibre.calibre_lvs_bin: "/share/instsww/mgc/CALIBRE/bin/calibre"
+lvs.calibre.calibredrv_bin: "/share/instsww/mgc/CALIBRE/bin/calibredrv"
+lvs.calibre.v2lvs_bin: "/share/instsww/mgc/CALIBRE/bin/v2lvs"
+lvs.calibre.MGC_HOME: "/shared/instsww/mgc"
+
+# VCS options
+vlsi.core.sim_tool: "hammer.sim.vcs"
+sim.vcs.version: "P-2019.06"  # TODO
+
+# Voltus options
+vlsi.core.power_tool: "hammer.power.voltus"
+power.voltus.version: "181"  # TODO
+
+# Generate Make include to aid in flow 
+vlsi.core.build_system: make
+
+# Power Straps
+par.power_straps_mode: generate
+par.generate_power_straps_method: by_tracks
+par.blockage_spacing: 2.0
+par.blockage_spacing_top_layer: met3
+par.generate_power_straps_options:
+  by_tracks:
+    strap_layers:
+      - met2
+      - met3
+      - met4
+      - met5
+    blockage_spacing_met2: 4.0
+    track_width: 6
+    track_width_met5: 2
+    track_spacing: 1
+    track_start: 10
+    track_start_met5: 1
+    power_utilization: 0.2
+    power_utilization_met2: 0.05
+    power_utilization_met5: 0.5  # TODO: try to increase this if possible
+

@@ -16,7 +16,8 @@ sim.inputs:
     - "+lint=all,noVCDE"
     - "+v2k"
     - "-debug"
+    - "-sverilog"
   top_module: "gcd_coprocessor"
   tb_name: "gcd_coprocessor_testbench"
   defines: 
-    - "CLOCK_PERIOD=1.00"
+    - "CLOCK_PERIOD=5.00"

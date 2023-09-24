@@ -16,4 +16,6 @@ sim.inputs:
   top_module: "gcd_coprocessor"
   tb_name: "gcd_coprocessor_testbench"
   defines: 
-    - "CLOCK_PERIOD=1.00"
+    - "CLOCK_PERIOD=5.00"
+    - "FUNCTIONAL"
+    - "UNIT_DELAY=#1"

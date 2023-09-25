@@ -18,7 +18,7 @@ sim.inputs:
   top_module: "gcd_coprocessor"
   tb_name: "gcd_coprocessor_testbench"
   defines: 
-    - "CLOCK_PERIOD=5.00"
+    - "CLOCK_PERIOD=20.00"
 
 power.inputs:
   database: "build/par-rundir/gcd_coprocessor_FINAL"

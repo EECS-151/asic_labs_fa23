@@ -1,5 +1,5 @@
 # Specify Global Variables
-gcd.clockPeriod: &CLK_PERIOD "5ns"
+gcd.clockPeriod: &CLK_PERIOD "20ns"
 gcd.verilogSrc: &VERILOG_SRC
   - "src/gcd_coprocessor.v"
   - "src/gcd_arbiter.v"
